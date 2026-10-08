@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Book } from './Entity/Book.entity';
 import { Reader } from './Entity/Reader.entity';
 import { BorrowedRecord } from './Entity/BorrowedRecord.entity';
+import { User } from './Entity/User.entity';
+import { AuthModule } from './auth/auth.module';
 import { BooksModule } from './books/books.module';
 import { ReadersModule } from './readers/readers.module';
 import { BorrowedRecordsModule } from './borrowed-records/borrowed-records.module';
@@ -15,6 +17,7 @@ import { BorrowedRecordsModule } from './borrowed-records/borrowed-records.modul
     BooksModule,
     ReadersModule,
     BorrowedRecordsModule,
+    AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -26,7 +29,7 @@ import { BorrowedRecordsModule } from './borrowed-records/borrowed-records.modul
         username: config.get<string>('DB_USERNAME', 'root'),
         password: config.get<string>('DB_PASSWORD', ''),
         database: config.get<string>('DB_DATABASE', 'library_db'),
-        entities: [Book, Reader, BorrowedRecord],
+        entities: [Book, Reader, BorrowedRecord, User],
         synchronize: config.get<string>('DB_SYNCHRONIZE', 'true') === 'true',
       }),
     }),

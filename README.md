@@ -31,6 +31,19 @@
 $ npm install
 ```
 
+## Authentication and authorization
+
+Set `JWT_SECRET` in `.env` to a long random value. New registrations have the `user` role. Register and log in at `POST /auth/register` and `POST /auth/login`. Use the returned `access_token` as `Authorization: Bearer <token>` for `/books`, `/readers`, and `/borrowed-records` endpoints. Deleting books or readers requires the `admin` role; promote an account manually in MySQL with `UPDATE users SET role = 'admin' WHERE email = 'your-email';`, then log in again to receive a token with the updated role. `GET /auth/me` returns the current token identity.
+
+Example registration body:
+
+```json
+{
+  "email": "reader@example.com",
+  "password": "password123"
+}
+```
+
 ## Compile and run the project
 
 ```bash

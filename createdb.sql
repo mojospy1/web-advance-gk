@@ -29,3 +29,12 @@ CREATE TABLE `borrowed_records` (
   `returnedAt` DATETIME NULL,
   PRIMARY KEY (`id`)
 );
+
+CREATE TABLE `users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(254) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `role` VARCHAR(20) NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UQ_users_email` (`email`)
+);
